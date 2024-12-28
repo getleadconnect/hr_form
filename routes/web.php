@@ -14,7 +14,9 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', function () {
-    return  redirect('application');
+	$job_cat=[];
+    return view('hr_form_new')->with('job_cat',$job_cat);
+	//return  redirect('application');
 });
 
 Route::controller(HomeController::class)->group(function() {
