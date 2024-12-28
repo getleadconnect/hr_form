@@ -12,9 +12,11 @@ use App\Http\Controllers\Admin\JobCategoryController;
 
 use App\Http\Controllers\HomeController;
 
+use App\Models\JobCategory;
 
 Route::get('/', function () {
-	$job_cat=[];
+	
+	$job_cat=JobCategory::where('status',1)->get();
     return view('hr_form_new')->with('job_cat',$job_cat);
 	//return  redirect('application');
 });
@@ -23,9 +25,9 @@ Route::controller(HomeController::class)->group(function() {
 	
 	Route::get('/application', 'index')->name('application');
 	Route::post('/save-application', 'store')->name('save-application');
-
+	Route::get('/finish', 'finish')->name('finish');
 });
-	
+
 
 Route::group(['prefix'=>'admin','as'=>'admin.'],function()
 {

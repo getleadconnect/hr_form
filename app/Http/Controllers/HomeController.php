@@ -88,7 +88,7 @@ class HomeController extends Controller
 			
 			if($apps)
 			{   
-				Session::flash('success',"Application successfully submitted.");
+				//Session::flash('success',"Application successfully submitted.");
 				DB::commit();
 				
 				$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
@@ -97,7 +97,7 @@ class HomeController extends Controller
 				$apiService=new ApiService();
 				$api_result=$apiService->sendDataToCrm($data);
 				\Log::info($api_result);
-				return redirect('application');
+				return redirect('finish');
 			}
 			else
 			{
@@ -115,6 +115,10 @@ class HomeController extends Controller
 		}
     }
   
+  public function finish()
+  {
+	  return view('hr_form_finish');
+  }
 
 
 }
