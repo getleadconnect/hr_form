@@ -16,7 +16,7 @@ class ApiService
 			$dat='&name='.$data['name'].'&countrycode='.$data['countrycode'].'&mobileno='.$data['mobile'].'&email='.$data['email'].'&Job category='.$data['category_name'].'&source=HR Form';
 			
 			$client = new Client();
-			$response = $client->get('https://app.getlead.co.uk/api/gl-website-contacts?token=gl_8eee5b46574f8f98df31'.$dat);
+			$response = $client->get('https://app.getlead.co.uk/api/gl-website-contacts?token=gl_55191348deaca7b60aaf'.$dat);
 			//return $response->getBody();
 			return json_decode($response->getBody(), true);
 		}
