@@ -122,6 +122,6 @@ class LoginController extends Controller
     {
         Auth::logout();
         Session::flush();
-        return redirect('/');
+        return redirect('admin/login');
     }
 }
