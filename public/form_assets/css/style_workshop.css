@@ -1109,7 +1109,7 @@ span.error {
   display: inline-block;
   padding: 6px 8px;
 }
-span.error:after {
+/*span.error:after {
   content: '';
   position: absolute;
   border-style: solid;
@@ -1120,7 +1120,7 @@ span.error:after {
   z-index: 1;
   bottom: -6px;
   left: 20%;
-}
+}*/
 
 .container_radio.version_2 .error, .container_check.version_2 .error {
   left: -15px;

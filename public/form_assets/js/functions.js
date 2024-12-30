@@ -34,8 +34,10 @@
             return !inputs.length || !!inputs.valid();
         }
     }).validate({
-        errorPlacement: function(error, element) {
-            if (element.is(':radio') || element.is(':checkbox')) {
+
+        errorPlacement: function(error, element) 
+		{
+	        if (element.is(':radio') || element.is(':checkbox')) {
                 error.insertBefore(element.next());
             } else {
                 error.insertAfter(element);

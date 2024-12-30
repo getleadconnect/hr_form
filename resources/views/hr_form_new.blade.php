@@ -17,12 +17,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Core CSS -->
-    <link href="{{asset('form_assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('form_assets/css/style_workshop.css')}}" rel="stylesheet">
-    <link href="{{asset('form_assets/css/custom.css')}}" rel="stylesheet">
+    <link href="{{url('form_assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url('form_assets/css/style_workshop.css')}}" rel="stylesheet">
+    <link href="{{url('form_assets/css/custom.css')}}" rel="stylesheet">
 
-	<link href="{{asset('assets/intl-tel-input17.0.3/intlTelInput.min.css')}}" rel="stylesheet"/>
-	<link href="{{asset('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet" />
+	<link href="{{url('assets/intl-tel-input17.0.3/intlTelInput.min.css')}}" rel="stylesheet"/>
+	<link href="{{url('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet" />
 
 	<style>
 
@@ -101,14 +101,13 @@
 																						
 											<div class="mb-3">
 	                                            <label for="mobile">Mobile</label>
-	                                            
 												
 												<div class="input-group mb-3">
 												  <div class="input-group-prepend">
 													<span class="input-group-text" id="basic-addon1">+91</span>
 												  </div>
 												  <input type="hidden" name="country_code" id="country_code" value="91">
-												  <input type="number" name="mobile" id="mobile" class="form-control required"  maxlength="10" placeholder="Mobile" aria-label="mobile" aria-describedby="basic-addon1" required>
+												  <input type="number" name="mobile" id="mobile" class="form-control required"  minlength=10 maxlength=10 placeholder="Mobile" aria-label="mobile" aria-describedby="basic-addon1" required>
 												</div>
 												
 	                                        </div>
@@ -118,13 +117,44 @@
 	                                            <input type="email" name="email" id="email" class="form-control required"  placeholder="Email" required>
 	                                            
 	                                        </div>
+											
+											@php
+												$sdt=Date('Y')-18;
+												$edt=Date('Y')-60;
+												$month=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+											@endphp
 	
 											<div class="mb-3 ">
 												<label for="dob">Date of Birth</label>
-	                                            <input type="date" name="dob" id="date" class="form-control required"  placeholder="Date of Birth" required>
+												
+												<div class="row">
+												<div class="col-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+												<select class="form-select" name="year" id="year"  class="required" placeholder="Year" required >
+													<option value="" >YYYY</option>
+													@for($x=$sdt;$x>=$edt;$x--)
+													<option value="{{$x}}">{{$x}}</option>	
+													@endfor
+												</select>
+												</div>
+												<div class="col-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+												
+												<select class="form-select" name="month" id="month"  class="required" placeholder="month" required >
+													<option value="" >MM</option>
+													@foreach($month as $key=>$mon)
+													<option value="{{++$key}}">{{$mon}}</option>	
+													@endforeach
+												</select>
+												</div>
+												<div class="col-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+												<select class="form-select" name="day" id="day"  class="required" placeholder="day" required >
+													<option value="" >DD</option>
+													@for($x=1;$x<=31;$x++)
+													<option value="{{$x}}">{{$x}}</option>	
+													@endfor
+												</select>
+												</div></div>
 	                                        </div>
-											
-											
+																						
 											<div class="mb-3 ">
 											<label for="gender">Gender</label>
 	                                            <select class="form-select" name="gender" id="gender"  class="required" placeholder="Gender" required>
@@ -317,15 +347,11 @@
 	<!-- /.modal -->
 
 	<!-- COMMON SCRIPTS -->
-	<script src="{{asset('form_assets/js/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{asset('form_assets/js/common_scripts.js')}}"></script>
-	<script src="{{asset('form_assets/js/velocity.min.js')}}"></script>
-	<script src="{{asset('form_assets/js/functions.js')}}"></script>
-	
-	<!--<script src="{{asset('assets/plugins/jquery-form/jquery.form.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.validation.min.js')}}"></script>-->
-	
-	  <script src="{{asset('assets/plugins/toastr/js/toastr.min.js')}}"></script>
+	<script src="{{url('form_assets/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{url('form_assets/js/common_scripts.js')}}"></script>
+	<script src="{{url('form_assets/js/velocity.min.js')}}"></script>
+	<script src="{{url('form_assets/js/functions.js')}}"></script>
+	<script src="{{url('assets/plugins/toastr/js/toastr.min.js')}}"></script>
 	
 @if(Session::get('success'))
 	<script>
@@ -338,17 +364,9 @@
 		toastr.error("{{Session::get('fail')}}");
 	</script>
 @endif
-
 	
 <script type="text/javascript">
 
-document.getElementById('date').value = '2004-01-01';
-
-
-//const d = new Date();
-//d.setYear(d.getFullYear() - 20);
-//date.max = d.toISOString().split("T")[0]; //this simply converts it to the correct format
-//date.value = d.toISOString().split("T")[0];
 
 	
 photo.onchange = evt => {

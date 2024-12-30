@@ -56,10 +56,12 @@ class HomeController extends Controller
 				FileUpload::uploadFile($imageMobile, $path,$cvfile,'local');
 			}
 			
+			$dob=$request->year."-".$request->month."-".$request->day;
+			
 			$data=[
 				'name'=>$request->first_name,
 				'photo'=>$path.$photo,
-				'dob'=>$request->dob,
+				'dob'=>$dob,
 				'technology_stack'=>$request->technology_stack,
 				'gender'=>$request->gender,
 				'marital_status'=>$request->marital_status,
@@ -94,9 +96,9 @@ class HomeController extends Controller
 				$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
 				$data['category_name']=$cat;
 				
-				$apiService=new ApiService();
-				$api_result=$apiService->sendDataToCrm($data);
-				\Log::info($api_result);
+				//$apiService=new ApiService();
+				//$api_result=$apiService->sendDataToCrm($data);
+				//\Log::info($api_result);
 				return redirect('finish');
 			}
 			else
