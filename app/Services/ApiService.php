@@ -13,8 +13,7 @@ class ApiService
     {
         try
 		{
-			$dat='&name='.$data['name'].'&countrycode='.$data['countrycode'].'&mobileno='.$data['mobile'].'&email='.$data['email'].'&Job category='.$data['category_name'].'&source=HR Form';
-			
+			$dat='&name='.$data['name'].'&countrycode='.$data['countrycode'].'&mobileno='.$data['mobile'].'&email='.$data['email'].'&type='.$data['category_name'].'&source=HR Form';
 			$client = new Client();
 			$response = $client->get('https://app.getlead.co.uk/api/gl-website-contacts?token=gl_55191348deaca7b60aaf'.$dat);
 			//return $response->getBody();
@@ -26,5 +25,9 @@ class ApiService
 			return $e->getMessage();
 		}
 	}
+	
+	
+	
+	
 	
 }
