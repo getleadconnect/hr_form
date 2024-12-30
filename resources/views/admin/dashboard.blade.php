@@ -18,8 +18,8 @@
 	  <div class="card-body">
 		<div class="d-flex align-items-center">
 		  <div class="">
-			<p class="mb-1">Option</p>
-			<h4 class="mb-0 text-pink">0</h4>
+			<p class="mb-1">Total Application</p>
+			<h4 class="mb-0 text-pink">{{$ap_count}}</h4>
 		  </div>
 		  <div class="ms-auto fs-2 text-pink">
 			<i class="bx bx-receipt"></i>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\Application;
+
 use Validator;
 use DataTables;
 use Session;
@@ -21,7 +23,9 @@ class DashboardController extends Controller
   
   public function index()
   {
-	 return view('admin.dashboard');
+	 $ap_count=Application::count();
+	 	 
+	 return view('admin.dashboard',compact('ap_count'));
   }	
   
  
