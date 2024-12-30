@@ -12,7 +12,7 @@
     <div class="breadcrumb-title pe-3">Dashboard</div>
  </div>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-4">
+<div class="row row-cols-1 row-cols-sm-4 row-cols-md-6 row-cols-xl-6 row-cols-xxl-6">
   <div class="col">
 	<div class="card radius-10">
 	  <div class="card-body">
@@ -34,8 +34,8 @@
 	  <div class="card-body">
 		<div class="d-flex align-items-center">
 		  <div class="">
-			<p class="mb-1">Option</p>
-			<h4 class="mb-0 text-info">0</h4>
+			<p class="mb-1">This Week</p>
+			<h4 class="mb-0 text-info">{{$week_count}}</h4>
 		  </div>
 		  <div class="ms-auto fs-2 text-info">
 			<i class="bx bx-receipt"></i>
@@ -50,11 +50,11 @@
 		  <div class="card-body">
 			<div class="d-flex align-items-center">
 			  <div class="">
-				<p class="mb-1">Option</p>
-				<h4 class="mb-0 text-purple">0</h4>
+				<p class="mb-1">This Month</p>
+				<h4 class="mb-0 text-purple">{{$month_count}}</h4>
 			  </div>
 			  <div class="ms-auto fs-2 text-purple">
-				<i class="bi bi-chat-right"></i>
+				<i class="bx bx-receipt"></i>
 			  </div>
 			</div>
 		  </div>
@@ -66,11 +66,11 @@
 		  <div class="card-body">
 			<div class="d-flex align-items-center">
 			  <div class="">
-				<p class="mb-1">Options</p>
-				<h4 class="mb-0 text-primary">0</h4>
+				<p class="mb-1">This Year</p>
+				<h4 class="mb-0 text-primary">{{$year_count}}</h4>
 			  </div>
 			  <div class="ms-auto fs-2 text-primary">
-				<i class="bi bi-truck"></i>
+				<i class="bx bx-receipt"></i>
 			  </div>
 			</div>
 		  </div>
