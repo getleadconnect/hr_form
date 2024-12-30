@@ -36,6 +36,8 @@ class ApplicationController extends Controller
       $apps = Application::select('applications.*','job_category.category_name')
 		->leftJoin('job_category','applications.job_category_id','=','job_category.id')
 		->orderby('id','Desc')->get();
+		
+	dd($apps);
 	
         return Datatables::of($apps)
 		->addIndexColumn()

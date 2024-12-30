@@ -21,7 +21,7 @@
     <link href="{{asset('form_assets/css/style_workshop.css')}}" rel="stylesheet">
     <link href="{{asset('form_assets/css/custom.css')}}" rel="stylesheet">
 
-	<link href="{{ asset('assets/intl-tel-input17.0.3/intlTelInput.min.css')}}" rel="stylesheet"/>
+	<link href="{{asset('assets/intl-tel-input17.0.3/intlTelInput.min.css')}}" rel="stylesheet"/>
 	<link href="{{asset('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet" />
 
 	<style>
