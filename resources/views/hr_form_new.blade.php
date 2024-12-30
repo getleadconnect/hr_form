@@ -121,7 +121,7 @@
 	
 											<div class="mb-3 ">
 												<label for="dob">Date of Birth</label>
-	                                            <input type="date" name="dob" id="dob" class="form-control required"  placeholder="Date of Birth" required>
+	                                            <input type="date" name="dob" id="date" class="form-control required"  placeholder="Date of Birth" required>
 	                                        </div>
 											
 											
@@ -341,6 +341,14 @@
 
 	
 <script type="text/javascript">
+
+document.getElementById('date').value = '2004-01-01';
+
+
+//const d = new Date();
+//d.setYear(d.getFullYear() - 20);
+//date.max = d.toISOString().split("T")[0]; //this simply converts it to the correct format
+//date.value = d.toISOString().split("T")[0];
 
 	
 photo.onchange = evt => {
