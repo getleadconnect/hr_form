@@ -36,9 +36,9 @@ class HomeController extends Controller
 		
 		//https://hr-form.blr1.digitaloceanspaces.com/user_files/shaji_testing_111743157622.png
 		  			
-		//DB::beginTransaction();
-		//try
-		//{
+		DB::beginTransaction();
+		try
+		{
 
 			$path = 'user_files/';
 			
@@ -96,33 +96,33 @@ class HomeController extends Controller
 			if($apps)
 			{   
 				//Session::flash('success',"Application successfully submitted.");
-				//DB::commit();
+				DB::commit();
 				
-				/*$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
+				$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
 				$data['category_name']=$cat;
 				
 				$apiService=new ApiService();
 				$api_result=$apiService->sendDataToCrm($data);
 				
-				\Log::info($api_result);*/
+				\Log::info($api_result);
 				return redirect('finish');
 			}
 			else
 			{
 				Session::flash('fail',"Something wrong, Try again.");
-				//DB::rollback();
+				DB::rollback();
 				return redirect()->back()->withInput();
 			}
 			
 
-	   /*}
+	   }
 		catch(\Exception $e)
 		{
 			\Log::info($e->getMessage());
 			DB::rollback();
 			Session::flash('fail',$e->getMessage());
 			return redirect()->back()->withInput();
-		}*/
+		}
 		
     }
 

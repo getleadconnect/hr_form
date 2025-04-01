@@ -118,11 +118,16 @@ public function destroy($id)
 	
 	try
 	{
-		$users=Application::where('id',$id)->first();
+		$app=Application::where('id',$id)->first();
 		
-		if($users)
+		if($app)
 		{
-			$res=$users->delete();
+			if($app->photo!='')
+				Storage::disk('spaces')->delete($users->photo);
+			if($app->cv_file!='')
+				Storage::disk('spaces')->delete($users->cv_file);
+			
+			$res=$app->delete();
 			if($res)
 			{   
 				return response()->json(['msg'=>'Application successfully removed.','status'=>true]);
