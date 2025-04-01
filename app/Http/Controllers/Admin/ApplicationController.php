@@ -61,8 +61,17 @@ class ApplicationController extends Controller
 		
 		->addColumn('photo', function ($row) 
 		{
+			
 			if ($row->photo !='') {
-                return  '<img src='.FileUpload::viewFile($row->photo,'local').' width="50" height="50">';
+				
+				if($row->id<=93)
+				{
+					return  '<img src='.FileUpload::viewFile($row->photo,'local').' width="50" height="50">';
+				}
+				else
+				{
+					return  '<img src='.config('constants.file_path').$row->photo.' width="50" height="50">';
+				}
             } else {
                 return "--Nil--";
             }
@@ -70,7 +79,15 @@ class ApplicationController extends Controller
 		->addColumn('cv_file', function ($row) 
 		{
 			if ($row->cv_file !='') {
-                return  '<a href="'.FileUpload::viewFile($row->cv_file,'local').'" target="_blank">View CV</a>';
+				if($row->id<=93)
+				{
+					return  '<a href="'.FileUpload::viewFile($row->cv_file,'local').'" target="_blank">View CV</a>';
+				}
+				else
+				{
+					return  '<a href="'.config('constants.file_path').$row->cv_file.'" target="_blank">View CV</a>';  //space account
+				}
+				
             } else {
                 return "--Nil--";
             }
@@ -128,11 +145,21 @@ public function viewApplicationDetails($id)
 	->leftJoin('job_category','applications.job_category_id','=','job_category.id')
 	->where('applications.id',$id)->get()->map(function($q)
 	{
-		if($q->photo!="")
-			$q->photo_file_path=FileUpload::viewFile($q->photo,'local');
-		if($q->cv_file!="")
-			$q->cv_file_path=FileUpload::viewFile($q->cv_file,'local');
-	
+		if($q->id<=93)
+		{
+			if($q->photo!="")
+				$q->photo_file_path=FileUpload::viewFile($q->photo,'local');
+			if($q->cv_file!="")
+				$q->cv_file_path=FileUpload::viewFile($q->cv_file,'local');
+		}
+		else
+		{
+			if($q->photo!="")
+				$q->photo_file_path=config('constants.file_path').$q->photo;
+			if($q->cv_file!="")
+				$q->cv_file_path=config('constants.file_path').$q->cv_file;
+		}
+		
 		return $q;
 		
 	})->first();

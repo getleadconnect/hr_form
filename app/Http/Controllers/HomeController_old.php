@@ -33,9 +33,7 @@ class HomeController extends Controller
       
   public function store(Request $request)
     {
-		
-		//https://hr-form.blr1.digitaloceanspaces.com/user_files/shaji_testing_111743157622.png
-		  			
+  			
 		DB::beginTransaction();
 		try
 		{
@@ -44,28 +42,25 @@ class HomeController extends Controller
 			
 			$photo="";
 			$cv_file="";
-
-			$nam=str_replace(' ','_',$request->first_name);
-			
+				
 			if($request->file('photo'))
-			{ 
-				$image = $request->file('photo');
-				$photo = $nam."_".rand(10, 100). date_timestamp_get(date_create()). '.' . $image->getClientOriginalExtension();
-				$fname1=Storage::disk('spaces')->putFileAs("user_files",$request->file('photo'),$photo, 'public');
+			{
+			$image = $request->file('photo');
+				$photo = rand(10, 100). date_timestamp_get(date_create()). '.' . $image->getClientOriginalExtension();
+				FileUpload::uploadFile($image, $path,$photo,'local');
+			}
+			if($request->file('cv_file'))
+			{
+				$imageMobile = $request->file('cv_file');
+				$cvfile = rand(10, 100). date_timestamp_get(date_create()). '.' . $imageMobile->getClientOriginalExtension();
+				FileUpload::uploadFile($imageMobile, $path,$cvfile,'local');
 			}
 			
-			if($request->file('cv_file'))
-			{ 
-				$imageMobile = $request->file('cv_file');
-				$cvfile = $nam."_".rand(10, 100). date_timestamp_get(date_create()). '.' . $imageMobile->getClientOriginalExtension();
-				$fname2=Storage::disk('spaces')->putFileAs("user_files",$request->file('cv_file'),$cvfile,'public');
-			}	
-
 			$dob=$request->year."-".$request->month."-".$request->day;
 			
 			$data=[
 				'name'=>$request->first_name,
-				'photo'=>$fname1,
+				'photo'=>$path.$photo,
 				'dob'=>$dob,
 				'technology_stack'=>$request->technology_stack,
 				'gender'=>$request->gender,
@@ -87,7 +82,7 @@ class HomeController extends Controller
 				'why_getlead'=>$request->why_getlead,
 				'qualification'=>$request->qualification,
 				'job_category_id'=>$request->job_category_id,
-				'cv_file'=>$fname2,
+				'cv_file'=>$path.$cvfile,
 				'declaration'=>$request->declaration,
 			];
 						
@@ -103,7 +98,6 @@ class HomeController extends Controller
 				
 				$apiService=new ApiService();
 				$api_result=$apiService->sendDataToCrm($data);
-				
 				\Log::info($api_result);
 				return redirect('finish');
 			}
@@ -113,7 +107,6 @@ class HomeController extends Controller
 				DB::rollback();
 				return redirect()->back()->withInput();
 			}
-			
 
 	   }
 		catch(\Exception $e)
@@ -123,8 +116,8 @@ class HomeController extends Controller
 			return redirect()->back()->withInput();
 		}
     }
-
-public function finish()
+  
+  public function finish()
   {
 	  return view('hr_form_finish');
   }

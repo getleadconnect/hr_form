@@ -17,12 +17,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Core CSS -->
-    <link href="{{asset('form_assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('form_assets/css/style_workshop.css')}}" rel="stylesheet">
-    <link href="{{asset('form_assets/css/custom.css')}}" rel="stylesheet">
+    <link href="{{url('form_assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url('form_assets/css/style_workshop.css')}}" rel="stylesheet">
+    <link href="{{url('form_assets/css/custom.css')}}" rel="stylesheet">
 
-	<link href="{{ asset('assets/intl-tel-input17.0.3/intlTelInput.min.css')}}" rel="stylesheet"/>
-	<link href="{{asset('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet" />
+	<link href="{{url('assets/intl-tel-input17.0.3/intlTelInput.min.css')}}" rel="stylesheet"/>
+	<link href="{{url('assets/plugins/toastr/css/toastr.min.css')}}" rel="stylesheet" />
+
+	<style>
+
+	.btn-radio
+	{
+		width:20px;
+		height:20px;
+		vertical-align:middle;
+		margin-left:15px;
+	}
+	</style>
 
 </head>
 
@@ -62,17 +73,54 @@
 			<div class="col-lg-7 d-flex flex-column content-right">
 	            <div class="container my-auto py-5">
 	                <div class="row">
-	                    <div class="col-lg-9 col-xl-9 col-xxl-9 mx-auto">
-						
-						<div class="row" style="font-family:Sans Serif">
-						<div class="col-lg-12 col-xl-12 col-xxl-12 text-center">
-						<img src="{{asset('form_assets/img/finish.png')}}" style="width:150px;" class="mb-3">
-						<h2>Success!!!<h2>
-						<h3>Your application successfully submitted.</h3>
-						<h4>Thank You.</h4>
-						</div>
-						</div>
- 
+	                    <div class="col-lg-9 col-xl-7 mx-auto">
+	                        <div id="wizard_container">
+	                            <div id="top-wizard">
+	                                <span id="location"></span>
+	                                <div id="progressbar"></div>
+	                            </div>
+	                            <!-- /top-wizard -->
+	                            <form id="wrapped" method="POST" action="{{url('save-application')}}" enctype="multipart/form-data">
+								@csrf
+								
+	                                <div id="middle-wizard">
+
+	                                    <h3 class="main_question">Register now!</h3>
+										
+                                    <div class="submit step">
+									
+										<div class="mb-3 ">
+											<label for="first_name">First name</label>
+	                                       <input type="text" name="first_name" id="first_name" class="form-control required" placeholder="Name" required>
+	                                    </div>
+									
+										<h3 class="main_question">Upload Documents</h3>
+                                        <div class="mb-3">
+                                            <label for="photo">Upload Your Photo</label>
+                                            <input type="file" name="photo" id="photo" class="form-control required" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cv_file">Upload Your CV</label>
+                                            <input type="file" name="cv_file" id="cv_file" class="form-control required" required>
+                                        </div>
+										
+										<div class="mb-3  ">
+											<label><b>Declaration</b></label>
+	                                        <p class="mt-2">I heare by declare that all the statments made in the application are true and complete to the best of my knowledge and belive.</p>
+	                                    </div>
+											
+                                    </div>
+
+	                                <!-- /middle-wizard -->
+	                                <div id="bottom-wizard">
+	                                    <button type="button" name="backward" class="backward" >Prev</button>
+	                                    <button type="button" name="forward" class="forward" >Next</button>
+	                                    <button type="submit" name="process" class="submit" >Submit</button>
+	                                </div>
+	                                <!-- /bottom-wizard -->
+	                            </form>
+	                        </div>
+	                        <!-- /Wizard container -->
 	                    </div>
 	                </div>
 	            </div>
@@ -108,15 +156,11 @@
 	<!-- /.modal -->
 
 	<!-- COMMON SCRIPTS -->
-	<script src="{{asset('form_assets/js/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{asset('form_assets/js/common_scripts.js')}}"></script>
-	<script src="{{asset('form_assets/js/velocity.min.js')}}"></script>
-	<script src="{{asset('form_assets/js/functions.js')}}"></script>
-	
-	<!--<script src="{{asset('assets/plugins/jquery-form/jquery.form.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.validation.min.js')}}"></script>-->
-	
-	  <script src="{{asset('assets/plugins/toastr/js/toastr.min.js')}}"></script>
+	<script src="{{url('form_assets/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{url('form_assets/js/common_scripts.js')}}"></script>
+	<script src="{{url('form_assets/js/velocity.min.js')}}"></script>
+	<script src="{{url('form_assets/js/functions.js')}}"></script>
+	<script src="{{url('assets/plugins/toastr/js/toastr.min.js')}}"></script>
 	
 @if(Session::get('success'))
 	<script>
@@ -129,9 +173,9 @@
 		toastr.error("{{Session::get('fail')}}");
 	</script>
 @endif
-
 	
 <script type="text/javascript">
+
 
 	
 photo.onchange = evt => {
