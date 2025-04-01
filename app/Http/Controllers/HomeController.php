@@ -98,13 +98,13 @@ class HomeController extends Controller
 				//Session::flash('success',"Application successfully submitted.");
 				DB::commit();
 				
-				$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
+				/*$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
 				$data['category_name']=$cat;
 				
 				$apiService=new ApiService();
 				$api_result=$apiService->sendDataToCrm($data);
 				
-				\Log::info($api_result);
+				\Log::info($api_result);*/
 				return redirect('finish');
 			}
 			else
