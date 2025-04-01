@@ -122,10 +122,11 @@ public function destroy($id)
 		
 		if($app)
 		{
-			if($app->photo!='')
+			/*if($app->photo!='')
 				Storage::disk('spaces')->delete($app->photo);
 			if($app->cv_file!='')
 				Storage::disk('spaces')->delete($app->cv_file);
+			*/
 			
 			$res=$app->delete();
 			if($res)
