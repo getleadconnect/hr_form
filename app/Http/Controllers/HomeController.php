@@ -34,13 +34,13 @@ class HomeController extends Controller
   public function store(Request $request)
     {
 		
-		//https://hr-form.blr1.digitaloceanspaces.com/user_files/shaji_testing_111743157622.png
+		//https://instisuite.sgp1.digitaloceanspaces.com/Resume-Getlead/shaji_testing_111743157622.png
 		  			
 		DB::beginTransaction();
 		try
 		{
 
-			$path = 'user_files/';
+			$path = 'Resume-Getlead';
 			
 			$photo="";
 			$cv_file="";
@@ -51,14 +51,14 @@ class HomeController extends Controller
 			{ 
 				$image = $request->file('photo');
 				$photo = $nam."_".rand(10, 100). date_timestamp_get(date_create()). '.' . $image->getClientOriginalExtension();
-				$fname1=Storage::disk('spaces')->putFileAs("user_files",$request->file('photo'),$photo, 'public');
+				$fname1=Storage::disk('spaces')->putFileAs("Resume-Getlead",$request->file('photo'),$photo, 'public');
 			}
 			
 			if($request->file('cv_file'))
 			{ 
 				$imageMobile = $request->file('cv_file');
 				$cvfile = $nam."_".rand(10, 100). date_timestamp_get(date_create()). '.' . $imageMobile->getClientOriginalExtension();
-				$fname2=Storage::disk('spaces')->putFileAs("user_files",$request->file('cv_file'),$cvfile,'public');
+				$fname2=Storage::disk('spaces')->putFileAs("Resume-Getlead",$request->file('cv_file'),$cvfile,'public');
 			}	
 
 			$dob=$request->year."-".$request->month."-".$request->day;
@@ -101,8 +101,8 @@ class HomeController extends Controller
 				$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
 				$data['category_name']=$cat;
 				
-				$apiService=new ApiService();
-				$api_result=$apiService->sendDataToCrm($data);
+				//$apiService=new ApiService();
+				//$api_result=$apiService->sendDataToCrm($data);
 				
 				\Log::info($api_result);
 				return redirect('finish');
@@ -130,6 +130,50 @@ public function finish()
   {
 	  return view('hr_form_finish');
   }
+
+
+
+//testing function -------------------------------------------
+
+public function store1(Request $request)
+    {
+		try{
+			
+			$path = 'Resume-Getlead';
+			
+			$photo="";
+			$cv_file="";
+
+			$nam=str_replace(' ','_',$request->first_name);
+			
+			if($request->file('photo'))
+			{ 
+				$image = $request->file('photo');
+				$photo = $nam."_".rand(10, 100). date_timestamp_get(date_create()). '.' . $image->getClientOriginalExtension();
+				$fname1=Storage::disk('spaces')->putFileAs("Resume-Getlead",$request->file('photo'),$photo, 'public');
+			}
+			
+			if($request->file('cv_file'))
+			{ 
+				$imageMobile = $request->file('cv_file');
+				$cvfile = $nam."_".rand(10, 100). date_timestamp_get(date_create()). '.' . $imageMobile->getClientOriginalExtension();
+				$fname2=Storage::disk('spaces')->putFileAs("Resume-Getlead",$request->file('cv_file'),$cvfile,'public');
+			}	
+			
+			}
+		catch(\Exception $e)
+		{
+			\Log::info($e->getMessage());
+			Session::flash('fail',$e->getMessage());
+			return redirect()->back()->withInput();
+		}
+	  
+    }
+
+
+
+
+
 
 
 }
