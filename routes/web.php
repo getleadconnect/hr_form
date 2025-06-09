@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::controller(HomeController::class)->group(function() {
 	
 	Route::get('/application', 'index')->name('application');
-	Route::post('/save-application', 'store1')->name('save-application');
+	Route::post('/save-application', 'store')->name('save-application');
 	Route::get('/finish', 'finish')->name('finish');
 	
 });
