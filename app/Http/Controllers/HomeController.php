@@ -104,7 +104,7 @@ class HomeController extends Controller
 				//$apiService=new ApiService();
 				//$api_result=$apiService->sendDataToCrm($data);
 				
-				\Log::info($api_result);
+				//\Log::info($api_result);
 				return redirect('finish');
 			}
 			else
