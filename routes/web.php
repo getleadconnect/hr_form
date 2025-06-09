@@ -17,7 +17,7 @@ use App\Models\JobCategory;
 Route::get('/', function () {
 	
 	$job_cat=JobCategory::where('status',1)->get();
-    return view('hr_form_new2')->with('job_cat',$job_cat);
+    return view('hr_form_new')->with('job_cat',$job_cat);
 	//return  redirect('application');
 });
 
