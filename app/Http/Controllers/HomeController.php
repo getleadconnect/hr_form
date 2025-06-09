@@ -101,10 +101,10 @@ class HomeController extends Controller
 				$cat=JobCategory::where('id',$request->job_category_id)->pluck('category_name')->first();
 				$data['category_name']=$cat;
 				
-				//$apiService=new ApiService();
-				//$api_result=$apiService->sendDataToCrm($data);
+				$apiService=new ApiService();
+				$api_result=$apiService->sendDataToCrm($data);
 				
-				//\Log::info($api_result);
+				\Log::info($api_result);
 				return redirect('finish');
 			}
 			else
